@@ -1,0 +1,12 @@
+replicaCount: 2
+
+image:
+  repository: ecommerceacrdenis.azurecr.io/notification-service
+  tag: latest
+  pullPolicy: Always
+
+namespace: notification-service
+
+service:
+  type: ClusterIP
+  port: 3002

@@ -1,0 +1,17 @@
+# kubernetes/security/namespaces.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: api-gateway
+  labels:
+    app: api-gateway   # label used by NetworkPolicy selectors
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: order-service
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: notification-service

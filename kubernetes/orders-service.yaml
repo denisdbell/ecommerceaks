@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+  namespace: order-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+        azure.workload.identity/use: "true"   # tells the webhook to inject the OIDC token
+    spec:
+      serviceAccountName: order-service-sa
+      volumes:
+      - name: secrets-store
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "order-service-secrets"
+
+      containers:
+      - name: order-service
+        image: ecommerceacrdenis.azurecr.io/order-service:latest
+        volumeMounts:
+        - name: secrets-store
+          mountPath: "/mnt/secrets"    # secrets appear as files here
+          readOnly: true

@@ -1,0 +1,31 @@
+replicaCount: 2
+
+hpa:
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilization: 70
+  targetMemoryUtilization: 80
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi
+
+image:
+  repository: ecommerceacrdenis.azurecr.io/api-gateway
+  tag: latest
+  pullPolicy: Always
+
+namespace: api-gateway
+
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 3000
+
+env:
+  ORDER_SERVICE_URL: "http://order-service.order-service.svc.cluster.local:3001"
+  NOTIFICATION_SERVICE_URL: "http://notification-service.notification-service.svc.cluster.local:3002"
