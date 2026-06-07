@@ -3,6 +3,8 @@ name: Build and Deploy Aks
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'flux/releases/**'
   workflow_dispatch:
 
 jobs:
