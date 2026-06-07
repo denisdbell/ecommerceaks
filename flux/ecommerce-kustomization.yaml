@@ -7,7 +7,7 @@ spec:
   interval: 5m
   sourceRef:
     kind: GitRepository
-    name: ecommerce-platform
+    name: flux-system
   path: ./flux/releases
   prune: true        # delete resources removed from git
   wait: true         # wait for all resources to become ready

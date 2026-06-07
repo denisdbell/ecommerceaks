@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  url: https://github.com/denisdbell/ecommerceaks
+  url: ssh://git@github.com/denisdbell/ecommerceaks
   ref:
     branch: main
   secretRef:
