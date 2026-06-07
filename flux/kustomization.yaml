@@ -1,0 +1,13 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: ecommerce-releases
+  namespace: flux-system
+spec:
+  interval: 5m
+  sourceRef:
+    kind: GitRepository
+    name: ecommerce-platform
+  path: ./flux/releases
+  prune: true        # delete resources removed from git
+  wait: true         # wait for all resources to become ready

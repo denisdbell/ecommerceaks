@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Azure Login
       uses: azure/login@v1
@@ -22,14 +24,16 @@ jobs:
         az acr build --registry ecommerceacrdenis --image order-service:${{ github.sha }}        services/order-service
         az acr build --registry ecommerceacrdenis --image notification-service:${{ github.sha }} services/notification-service
 
-    - name: Set AKS context
-      uses: azure/aks-set-context@v3
-      with:
-        resource-group: ecommerce-rg
-        cluster-name: ecommerce-aks
-
-    - name: Helm upgrade
+    - name: Update image tags for Flux
       run: |
-        helm upgrade api-gateway          helm/api-gateway          -n api-gateway          --set image.tag=${{ github.sha }}
-        helm upgrade order-service        helm/order-service        -n order-service        --set image.tag=${{ github.sha }}
-        helm upgrade notification-service helm/notification-service -n notification-service --set image.tag=${{ github.sha }}
+        sed -i "s|tag: .*|tag: ${{ github.sha }}|g" flux/releases/api-gateway.yaml
+        sed -i "s|tag: .*|tag: ${{ github.sha }}|g" flux/releases/order-service.yaml
+        sed -i "s|tag: .*|tag: ${{ github.sha }}|g" flux/releases/notification-service.yaml
+
+    - name: Commit updated image tags
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add flux/releases/
+        git commit -m "chore: update image tags to ${{ github.sha }}"
+        git push

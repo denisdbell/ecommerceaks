@@ -1,0 +1,21 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: notification-service
+  namespace: flux-system
+spec:
+  interval: 5m
+  targetNamespace: notification-service
+  chart:
+    spec:
+      chart: ./helm/notification-service
+      sourceRef:
+        kind: GitRepository
+        name: ecommerce-platform
+        namespace: flux-system
+      interval: 1m
+  values:
+    image:
+      repository: ecommerceacrdenis.azurecr.io/notification-service
+      tag: latest
+    replicaCount: 2

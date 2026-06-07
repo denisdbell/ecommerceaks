@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+  namespace: {{ .Values.namespace }}
+data:
+  NOTIFICATION_SERVICE_URL: {{ .Values.env.NOTIFICATION_SERVICE_URL }}
+  LOG_LEVEL: {{ .Values.env.LOG_LEVEL }}
+  PORT: {{ .Values.service.port | quote }}

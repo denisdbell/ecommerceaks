@@ -30,3 +30,13 @@ kubectl rollout status deployment/notification-service -n notification-service
 
 echo ""
 echo "Deploy complete. All services running tag: $TAG"
+
+#Fix for secret provider not working with AKS 1.27+ due to CRD conflicts with Azure Key Vault Secrets Provider
+# Enable via Azure CLI — Azure manages the CRDs, no conflicts possible
+az aks enable-addons \
+  -g ecommerce-rg \
+  -n ecommerce-aks \
+  --addons azure-keyvault-secrets-provider
+
+# Verify driver pods are running
+kubectl get pods -n kube-system -l app=secrets-store-csi-driver

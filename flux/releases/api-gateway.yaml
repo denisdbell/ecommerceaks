@@ -1,0 +1,21 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: api-gateway
+  namespace: flux-system
+spec:
+  interval: 5m
+  targetNamespace: api-gateway
+  chart:
+    spec:
+      chart: ./helm/api-gateway
+      sourceRef:
+        kind: GitRepository
+        name: ecommerce-platform
+        namespace: flux-system
+      interval: 1m
+  values:
+    image:
+      repository: ecommerceacrdenis.azurecr.io/api-gateway
+      tag: latest
+    replicaCount: 2
