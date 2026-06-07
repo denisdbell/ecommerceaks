@@ -17,5 +17,5 @@ spec:
   values:
     image:
       repository: ecommerceacrdenis.azurecr.io/api-gateway
-      tag: 092dc73f0a0cad4f14eba4a538541f5009be49ed
+      tag: 44d1e438824045e4b5d632919039badcec531dd1
     replicaCount: 2
