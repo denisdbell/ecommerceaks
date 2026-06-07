@@ -17,5 +17,5 @@ spec:
   values:
     image:
       repository: ecommerceacrdenis.azurecr.io/notification-service
-      tag: e300525c91007c9d3370eff594d2a96d1717c0d6
+      tag: 11a7c10b50ca81e4f0b25c964f76a3a38f75221c
     replicaCount: 2
