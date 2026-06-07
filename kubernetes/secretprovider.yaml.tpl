@@ -7,9 +7,9 @@ spec:
   provider: azure
   parameters:
     usePodIdentity: "false"
-    clientID: "32facfef-c034-4678-9a8c-d6427d83fcd9"
-    keyvaultName: "ecommerce-kv"
-    tenantId: "8af2a7d4-d3a6-44ab-8818-f84ba51bd431"
+    clientID: "${client_id}"
+    keyvaultName: "${keyvault_name}"
+    tenantId: "${tenant_id}"
     objects: |
       array:
         - |

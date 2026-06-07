@@ -105,6 +105,15 @@ output "workload_identity_client_id" {
   value = azurerm_user_assigned_identity.order_service.client_id
 }
 
+resource "local_file" "secretprovider" {
+  content = templatefile("${path.module}/../kubernetes/secretprovider.yaml.tpl", {
+    client_id     = azurerm_user_assigned_identity.order_service.client_id
+    tenant_id     = data.azurerm_client_config.current.tenant_id
+    keyvault_name = azurerm_key_vault.kv.name
+  })
+  filename = "${path.module}/../kubernetes/secretprovider.yaml"
+}
+
 resource "azurerm_log_analytics_workspace" "lawaks" {
   name                = "lawaks"
   location            = azurerm_resource_group.rg.location

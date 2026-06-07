@@ -22,3 +22,4 @@ charts/
 
 # Kubernetes secrets
 *-secret.yaml
+kubernetes/secretprovider.yaml
