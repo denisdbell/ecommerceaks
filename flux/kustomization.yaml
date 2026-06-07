@@ -1,13 +1,8 @@
-apiVersion: kustomize.toolkit.fluxcd.io/v1
+apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-metadata:
-  name: ecommerce-releases
-  namespace: flux-system
-spec:
-  interval: 5m
-  sourceRef:
-    kind: GitRepository
-    name: ecommerce-platform
-  path: ./flux/releases
-  prune: true        # delete resources removed from git
-  wait: true         # wait for all resources to become ready
+resources:
+  - sources/gitrepository.yaml
+  - ecommerce-kustomization.yaml
+  - releases/api-gateway.yaml
+  - releases/order-service.yaml
+  - releases/notification-service.yaml
