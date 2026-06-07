@@ -8,3 +8,5 @@ spec:
   url: https://github.com/denisdbell/ecommerceaks
   ref:
     branch: main
+  secretRef:
+    name: flux-system
