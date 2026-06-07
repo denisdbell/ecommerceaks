@@ -100,18 +100,25 @@ resource "azurerm_role_assignment" "order_service_kv" {
   scope                = azurerm_key_vault.kv.id
 }
 
+# Grant the operator (current Terraform caller) write access to manage secrets
+resource "azurerm_role_assignment" "operator_kv" {
+  principal_id         = data.azurerm_client_config.current.object_id
+  role_definition_name = "Key Vault Secrets Officer"
+  scope                = azurerm_key_vault.kv.id
+}
+
 # Output the client ID needed for SecretProviderClass and the service account annotation
 output "workload_identity_client_id" {
   value = azurerm_user_assigned_identity.order_service.client_id
 }
 
-resource "local_file" "secretprovider" {
-  content = templatefile("${path.module}/../kubernetes/secretprovider.yaml.tpl", {
+resource "local_file" "order_service_values" {
+  content = templatefile("${path.module}/../helm/order-service/values.yaml.tpl", {
     client_id     = azurerm_user_assigned_identity.order_service.client_id
     tenant_id     = data.azurerm_client_config.current.tenant_id
     keyvault_name = azurerm_key_vault.kv.name
   })
-  filename = "${path.module}/../kubernetes/secretprovider.yaml"
+  filename = "${path.module}/../helm/order-service/values.yaml"
 }
 
 resource "azurerm_log_analytics_workspace" "lawaks" {

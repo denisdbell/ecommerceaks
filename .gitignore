@@ -23,3 +23,7 @@ charts/
 # Kubernetes secrets
 *-secret.yaml
 kubernetes/secretprovider.yaml
+
+# Terraform-generated files
+kubernetes/service-account.yaml
+helm/order-service/values.yaml
