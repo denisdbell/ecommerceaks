@@ -17,5 +17,5 @@ spec:
   values:
     image:
       repository: ecommerceacrdenis.azurecr.io/order-service
-      tag: c20f484fce2c7bac5e3252188ae505d6b048e6ee
+      tag: 61fa634bd95d9f44e0de55dc38491bd0660376f9
     replicaCount: 2
