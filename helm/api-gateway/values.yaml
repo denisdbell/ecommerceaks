@@ -22,9 +22,12 @@ image:
 namespace: api-gateway
 
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 80
   targetPort: 3000
+
+ingress:
+  path: /
 
 env:
   ORDER_SERVICE_URL: "http://order-service.order-service.svc.cluster.local:3001"
