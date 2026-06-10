@@ -12,7 +12,7 @@ service:
   port: 3001
 
 workloadIdentity:
-  clientId: "a717e35e-9fe2-4e7a-9ec1-147588c3381e"
+  clientId: "123ac43f-c563-4ab7-9c45-982d5652be9e"
 
 keyVault:
   name: "ecommerce-kv-aks"
@@ -20,4 +20,3 @@ keyVault:
 
 env:
   NOTIFICATION_SERVICE_URL: "http://notification-service.notification-service.svc.cluster.local:3002"
-  LOG_LEVEL: "info"
