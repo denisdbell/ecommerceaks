@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
+  releaseName: api-gateway
   targetNamespace: api-gateway
   chart:
     spec:

@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
+  releaseName: notification-service
   targetNamespace: notification-service
   chart:
     spec:

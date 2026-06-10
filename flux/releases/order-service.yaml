@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
+  releaseName: order-service
   targetNamespace: order-service
   chart:
     spec:
